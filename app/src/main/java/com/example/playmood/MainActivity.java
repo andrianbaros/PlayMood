@@ -13,6 +13,7 @@ import com.example.moodmusicapp.presenter.MainPresenter;
 import com.example.moodmusicapp.view.MainView;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
+
 public class MainActivity extends AppCompatActivity implements MainView {
 
     private PreviewView previewView;
