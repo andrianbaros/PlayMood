@@ -38,7 +38,7 @@ dependencies {
     implementation(libs.constraintlayout)
 
     // Tambahan: ML Kit Face Detection
-    implementation("com.google.mlkit:face-detection:17.1.0")
+    implementation("com.google.mlkit:face-detection:16.1.5")
 
     // Tambahan: CameraX (versi stabil disarankan)
     implementation("androidx.camera:camera-core:1.1.0")

@@ -3,14 +3,16 @@ package com.example.playmood;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.OptIn;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.*;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
 
-import com.example.moodmusicapp.presenter.MainPresenter;
-import com.example.moodmusicapp.view.MainView;
+import com.example.playmood.presenter.MainPresenter;
+import com.example.playmood.view.MainView;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
 
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         imageCapture.takePicture(ContextCompat.getMainExecutor(this),
                 new ImageCapture.OnImageCapturedCallback() {
+                    @OptIn(markerClass = ExperimentalGetImage.class)
                     @Override
                     public void onCaptureSuccess(ImageProxy imageProxy) {
                         if (imageProxy.getImage() != null) {
