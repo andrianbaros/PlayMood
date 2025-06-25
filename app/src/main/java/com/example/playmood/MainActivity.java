@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         presenter = new MainPresenter(this);
         startCamera();
-
+//baros
         btnDetect.setOnClickListener(v -> captureImageAndDetect());
     }
 
