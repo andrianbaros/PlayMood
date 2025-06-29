@@ -33,6 +33,9 @@
             <!-- Signup Activity -->
             <activity android:name=".SignupActivity" android:exported="true" />
 
+            <activity android:name=".ResetPasswordActivity" android:exported="true"/>
+
+
 
         </application>
 

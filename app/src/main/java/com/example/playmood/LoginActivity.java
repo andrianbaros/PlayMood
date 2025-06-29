@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     EditText loginUsername, loginPassword;
     Button loginButton;
-    TextView signupRedirectText;
+    TextView signupRedirectText, forgotPasswordText;
 
     LoginPresenter loginPresenter;
 
@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         loginPassword = findViewById(R.id.Login_Password);
         loginButton = findViewById(R.id.Login_Button);
         signupRedirectText = findViewById(R.id.signupRedicrectText);
+        forgotPasswordText = findViewById(R.id.forgotPasswordText);
 
         loginPresenter = new LoginPresenter(this);
 
@@ -42,6 +43,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         signupRedirectText.setOnClickListener(v -> {
             startActivity(new Intent(this, SignupActivity.class));
         });
+
+        TextView forgotPasswordText = findViewById(R.id.forgotPasswordText);
+        forgotPasswordText.setOnClickListener(v -> {
+            // Arahkan ke halaman Reset Password, atau tampilkan dialog
+            startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+        });
+
     }
 
     @Override
