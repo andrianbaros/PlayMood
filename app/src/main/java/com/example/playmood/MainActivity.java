@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter = new MainPresenter(this);
         startCamera();
 //baros
-        // Tambahkan listener untuk tombol deteksi
+
         btnDetect.setOnClickListener(v -> captureImageAndDetect());
     }
 
