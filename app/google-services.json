@@ -13,7 +13,12 @@
           "package_name": "com.example.myapplication"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "484152153033-mrlkikafo2njdbi68479nu2f6dld8822.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyALQWCALfrCRyvxbkINShfb6MgFkSREva0"
@@ -21,7 +26,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484152153033-mrlkikafo2njdbi68479nu2f6dld8822.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     },
@@ -32,7 +42,20 @@
           "package_name": "com.example.playmood"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "484152153033-5vtcvhk9r7k7nsejvpnhlobjnivi5aik.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.playmood",
+            "certificate_hash": "3a660302fc52794760e5cb1c19fe604c8101a7f6"
+          }
+        },
+        {
+          "client_id": "484152153033-mrlkikafo2njdbi68479nu2f6dld8822.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyALQWCALfrCRyvxbkINShfb6MgFkSREva0"
@@ -40,7 +63,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484152153033-mrlkikafo2njdbi68479nu2f6dld8822.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

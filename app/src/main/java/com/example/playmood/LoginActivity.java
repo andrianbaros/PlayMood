@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.playmood.presenter.LoginPresenter;
 import com.example.playmood.view.LoginView;
-import com.example.playmood.R;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
 
@@ -44,16 +43,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             startActivity(new Intent(this, SignupActivity.class));
         });
 
-        TextView forgotPasswordText = findViewById(R.id.forgotPasswordText);
         forgotPasswordText.setOnClickListener(v -> {
-            // Arahkan ke halaman Reset Password, atau tampilkan dialog
-            startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+            startActivity(new Intent(this, ResetPasswordActivity.class));
         });
-
     }
 
     @Override
     public void onLoginSuccess() {
+        Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

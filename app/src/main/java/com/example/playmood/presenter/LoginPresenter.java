@@ -1,22 +1,21 @@
 package com.example.playmood.presenter;
+
 import androidx.annotation.NonNull;
 
 import com.example.playmood.model.UserModel;
 import com.example.playmood.view.LoginView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.*;
 
 public class LoginPresenter {
-    private LoginView loginView;
-    private DatabaseReference reference;
+    private final LoginView loginView;
+    private final DatabaseReference reference;
+    private final FirebaseAuth firebaseAuth;
 
     public LoginPresenter(LoginView loginView) {
         this.loginView = loginView;
-        reference = FirebaseDatabase.getInstance().getReference("Users");
+        this.reference = FirebaseDatabase.getInstance().getReference("Users");
+        this.firebaseAuth = FirebaseAuth.getInstance();
     }
 
     public void login(String username, String password) {
@@ -29,18 +28,21 @@ public class LoginPresenter {
             return;
         }
 
-        Query checkUser = reference.orderByChild("username").equalTo(username);
-
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+        // Cari user berdasarkan username
+        Query query = reference.orderByChild("username").equalTo(username);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    for (DataSnapshot userSnap : snapshot.getChildren()) {
-                        UserModel user = userSnap.getValue(UserModel.class);
-                        if (user != null && user.getPassword().equals(password)) {
-                            loginView.onLoginSuccess();
-                        } else {
-                            loginView.onLoginError("Password salah");
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        UserModel user = data.getValue(UserModel.class);
+                        if (user != null) {
+                            String email = user.getEmail();
+
+                            // Login dengan email yang ditemukan
+                            firebaseAuth.signInWithEmailAndPassword(email, password)
+                                    .addOnSuccessListener(authResult -> loginView.onLoginSuccess())
+                                    .addOnFailureListener(e -> loginView.onLoginError("Login gagal: " + e.getMessage()));
                         }
                     }
                 } else {
@@ -50,7 +52,7 @@ public class LoginPresenter {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                loginView.onLoginError("Database error: " + error.getMessage());
+                loginView.onLoginError("Error: " + error.getMessage());
             }
         });
     }
