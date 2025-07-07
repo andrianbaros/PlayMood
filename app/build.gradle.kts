@@ -26,6 +26,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -38,10 +39,10 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
 
-    // Tambahan: ML Kit Face Detection
+    //  ML Kit Face Detection
     implementation("com.google.mlkit:face-detection:16.1.5")
 
-    // Tambahan: CameraX (versi stabil disarankan)
+    //  CameraX (versi stabil disarankan)
     implementation("androidx.camera:camera-core:1.1.0")
     implementation("androidx.camera:camera-camera2:1.1.0")
     implementation("androidx.camera:camera-lifecycle:1.1.0")
@@ -51,9 +52,14 @@ dependencies {
     implementation(libs.firebase.database)
     implementation("com.google.firebase:firebase-auth:22.3.1")
 
+    //  Spotify Auth SDK
+    implementation("com.spotify.android:auth:1.2.5")
+
+    // Spotify App Remote SDK (untuk kontrol playback)
+    implementation("com.spotify.android:spotify-app-remote:0.7.2")
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
-

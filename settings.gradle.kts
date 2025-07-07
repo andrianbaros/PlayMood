@@ -11,14 +11,16 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        jcenter() //
+        maven { url "https://maven.spotify.com" } //
     }
 }
 
 rootProject.name = "Playmood"
 include(":app")
- 
