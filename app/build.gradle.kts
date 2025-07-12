@@ -55,8 +55,8 @@ dependencies {
     //  Spotify Auth SDK
     implementation("com.spotify.android:auth:1.2.5")
 
-    // Spotify App Remote SDK (untuk kontrol playback)
-    implementation("com.spotify.android:spotify-app-remote:0.7.2")
+//    // Spotify App Remote SDK (untuk kontrol playback)
+//    implementation("com.spotify.android:spotify-app-remote:0.7.2")
 
     // Testing
     testImplementation(libs.junit)

@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void onLoginSuccess() {
         Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, RouterActivity.class));
         finish();
     }
 

@@ -17,8 +17,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() //
-        maven { url "https://maven.spotify.com" } //
+//        jcenter() //
+//        maven { url "https://maven.spotify.com" } //
     }
 }
 
