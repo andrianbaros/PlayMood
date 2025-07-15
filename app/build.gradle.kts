@@ -39,10 +39,10 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
 
-    //  ML Kit Face Detection
+    // ML Kit Face Detection
     implementation("com.google.mlkit:face-detection:16.1.5")
 
-    //  CameraX (versi stabil disarankan)
+    // CameraX
     implementation("androidx.camera:camera-core:1.1.0")
     implementation("androidx.camera:camera-camera2:1.1.0")
     implementation("androidx.camera:camera-lifecycle:1.1.0")
@@ -52,11 +52,16 @@ dependencies {
     implementation(libs.firebase.database)
     implementation("com.google.firebase:firebase-auth:22.3.1")
 
-    //  Spotify Auth SDK
+    // Spotify Auth SDK
     implementation("com.spotify.android:auth:1.2.5")
 
-//    // Spotify App Remote SDK (untuk kontrol playback)
-//    implementation("com.spotify.android:spotify-app-remote:0.7.2")
+    // Glide (untuk Java, gunakan annotationProcessor)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
+    // Retrofit & Gson Converter
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // Testing
     testImplementation(libs.junit)

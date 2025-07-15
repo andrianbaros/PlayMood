@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
@@ -11,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Header: Search dan Menu -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,11 +20,9 @@
 
             <ImageView
                 android:layout_width="24dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:contentDescription="Search Icon"
+                android:layout_height="24dp"
                 android:src="@drawable/search"
-                app:itemIconTint="@color/black" />
+                android:contentDescription="Search Icon" />
 
             <View
                 android:layout_width="0dp"
@@ -33,21 +31,19 @@
 
             <ImageView
                 android:layout_width="24dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:contentDescription="Menu"
+                android:layout_height="24dp"
                 android:src="@drawable/menu"
-                app:itemIconTint="@color/black" />
+                android:contentDescription="Menu Icon" />
         </LinearLayout>
 
+        <!-- Banner Album -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/bg_album_card"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center_vertical">
+            android:padding="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -72,67 +68,27 @@
                 android:layout_marginTop="2dp" />
         </LinearLayout>
 
+        <!-- Label Popular Songs -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Popular Songs"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Horizontal Scroll List Album -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:scrollbars="none">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/songListContainer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
-
-
-                <TextView
-                    android:id="@+id/tab_news"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="News"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:paddingHorizontal="24dp"
-                    android:paddingVertical="8dp" />
-
-                <TextView
-                    android:id="@+id/tab_video"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingHorizontal="24dp"
-                    android:paddingVertical="8dp"
-                    android:text="Video"
-                    android:textColor="@color/abu" />
-
-                <TextView
-                    android:id="@+id/tab_artists"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Artists"
-                    android:textColor="@color/abu"
-                    android:gravity="center"
-                    android:paddingHorizontal="24dp"
-                    android:paddingVertical="8dp" />
-
-                <TextView
-                    android:id="@+id/tab_podcast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Podcast"
-                    android:textColor="@color/abu"
-                    android:gravity="center"
-                    android:paddingHorizontal="24dp"
-                    android:paddingVertical="8dp" />
-
-            </LinearLayout>
+                android:orientation="horizontal" />
         </HorizontalScrollView>
-
-
-        <FrameLayout
-            android:id="@+id/tab_content_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
     </LinearLayout>
 </ScrollView>
