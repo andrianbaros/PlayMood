@@ -39,5 +39,6 @@
         <activity android:name=".ResetPasswordActivity" android:exported="true" />
         <activity android:name=".RouterActivity" android:exported="true" />
         <activity android:name=".MusicPlayerActivity" />
+        <activity android:name=".PlaylistActivity" />
     </application>
 </manifest>

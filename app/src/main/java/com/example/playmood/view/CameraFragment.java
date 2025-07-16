@@ -1,5 +1,6 @@
 package com.example.playmood.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.playmood.R;
 import com.example.playmood.presenter.MainPresenter;
+import com.example.playmood.PlaylistActivity;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
 
@@ -70,7 +72,7 @@ public class CameraFragment extends Fragment implements MainView {
 
                 cameraProvider.unbindAll();
                 cameraProvider.bindToLifecycle(
-                        getViewLifecycleOwner(),  // Fix error di sini
+                        getViewLifecycleOwner(),
                         cameraSelector,
                         preview,
                         imageCapture
@@ -112,6 +114,13 @@ public class CameraFragment extends Fragment implements MainView {
     @Override
     public void showDetectedMood(String mood) {
         txtMood.setText("Mood: " + mood);
+
+        // Pindah ke PlaylistActivity sambil kirim data mood
+        requireActivity().runOnUiThread(() -> {
+            Intent intent = new Intent(requireContext(), PlaylistActivity.class);
+            intent.putExtra("mood", mood); // Kirim mood ke PlaylistActivity
+            startActivity(intent);
+        });
     }
 
     @Override

@@ -12,8 +12,8 @@ public class MoodModel {
     public static String getMoodFromFace(Face face) {
         Float smileProb = face.getSmilingProbability();
         if (smileProb != null) {
-            if (smileProb > 0.6) return "Happy";
-            else if (smileProb < 0.3) return "Sad";
+            if (smileProb > 0.6f) return "Happy";
+            else if (smileProb < 0.3f) return "Sad";
             else return "Neutral";
         }
         return "Unknown";
