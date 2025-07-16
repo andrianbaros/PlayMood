@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,12 +22,14 @@ import com.example.playmood.model.AlbumModel;
 import com.example.playmood.presenter.HomePresenter;
 import com.example.playmood.presenter.contract.HomeContract;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements HomeContract.View {
 
     private HomeContract.Presenter presenter;
     private LinearLayout songListContainer;
+    private List<AlbumModel> fullAlbumList = new ArrayList<>();
 
     public HomeFragment() {}
 
@@ -38,10 +41,25 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Inisialisasi view dari layout
         songListContainer = view.findViewById(R.id.songListContainer);
+        SearchView searchView = view.findViewById(R.id.searchView);
 
-        // Inisialisasi presenter dan load data Supabase
+        // SearchView selalu terlihat (dari XML) -> tambahkan pencarian
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterAlbums(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterAlbums(newText);
+                return true;
+            }
+        });
+
+        // Inisialisasi presenter dan ambil data
         presenter = new HomePresenter(this);
         presenter.onHomeLoaded();
 
@@ -50,15 +68,14 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
     @Override
     public void showAlbums(List<AlbumModel> albums) {
-        Log.d("AlbumCheck", "Jumlah album: " + (albums != null ? albums.size() : 0));
-        if (albums != null) {
-            for (AlbumModel album : albums) {
-                Log.d("AlbumCheck", "Judul: " + album.getTitle() + " | Artist: " + album.getArtist());
-            }
-        }
+        if (albums == null || getContext() == null) return;
 
-        if (songListContainer == null || getContext() == null) return;
+        Log.d("AlbumCheck", "Jumlah album: " + albums.size());
+        fullAlbumList = albums; // Simpan untuk pencarian/filter
+        displayAlbums(albums);
+    }
 
+    private void displayAlbums(List<AlbumModel> albums) {
         songListContainer.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(getContext());
 
@@ -79,7 +96,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                     .centerCrop()
                     .into(imageCover);
 
-            // Tombol play: buka MusicPlayerActivity dengan data album
             playButton.setOnClickListener(v -> {
                 Intent intent = new Intent(getContext(), MusicPlayerActivity.class);
                 intent.putExtra("TITLE", album.getTitle());
@@ -93,9 +109,21 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         }
     }
 
+    private void filterAlbums(String query) {
+        List<AlbumModel> filteredList = new ArrayList<>();
+
+        for (AlbumModel album : fullAlbumList) {
+            if (album.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+                    album.getArtist().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(album);
+            }
+        }
+
+        displayAlbums(filteredList);
+    }
+
     @Override
     public void showWelcomeMessage(String message) {
-        // Contoh jika ingin menampilkan Toast ke pengguna
-        // Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        // Optional: Tampilkan pesan selamat datang
     }
 }

@@ -23,7 +23,7 @@
                 android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_media_previous"
+                android:src="@drawable/back"
                 android:background="@android:color/transparent" />
 
             <TextView
@@ -31,16 +31,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Now Playing"
+                android:textColor="@color/hijau"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <ImageButton
-                android:id="@+id/btnMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_more"
-                android:background="@android:color/transparent" />
+
         </LinearLayout>
 
         <!-- Album Art -->
@@ -57,30 +53,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Judul Lagu"
+            android:textColor="@color/hijau"
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="12dp"
             android:gravity="center" />
 
-        <TextView
-            android:id="@+id/songArtist"
+        <!-- Container untuk artis dan tombol favorit -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nama Artis"
-            android:textSize="16sp"
-            android:textColor="#777777"
+            android:orientation="horizontal"
             android:paddingBottom="8dp"
-            android:gravity="center" />
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_vertical">
 
-        <!-- Favorite Button -->
-        <ImageButton
-            android:id="@+id/btnFavorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/btn_star_big_off"
-            android:background="@android:color/transparent"
-            android:layout_gravity="center_horizontal"
-            android:padding="8dp" />
+            <!-- Nama Artis -->
+            <TextView
+                android:id="@+id/songArtist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Nama Artis"
+                android:textSize="16sp"
+                android:textColor="#777777" />
+
+            <!-- Tombol Favorite -->
+            <ImageButton
+                android:id="@+id/btnFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/like"
+                android:background="@android:color/transparent"
+                android:padding="8dp" />
+        </LinearLayout>
 
         <!-- Seek Bar -->
         <SeekBar
