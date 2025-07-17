@@ -1,6 +1,8 @@
 package com.example.playmood;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,10 +53,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             startActivity(new Intent(this, SignupActivity.class));
         });
 
+        forgotPasswordText.setOnClickListener(v -> {
+            startActivity(new Intent(this, ResetPasswordActivity.class));
+        });
+
     }
 
     private void showBottomSheetDialog() {
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.TransparentBottomSheetDialog);
         View bottomSheetView = LayoutInflater.from(this).inflate(
                 R.layout.bottom_sheet_login_options,
                 null
@@ -64,6 +70,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         Button btnLogin = bottomSheetView.findViewById(R.id.btnLogin);
         Button btnCreate = bottomSheetView.findViewById(R.id.btnCreate);
+
+
 
 
         btnLogin.setOnClickListener(v -> {
