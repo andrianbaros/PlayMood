@@ -1,7 +1,5 @@
 package com.example.playmood.presenter;
 
-
-
 import com.example.playmood.model.TokenResponse;
 import com.example.playmood.model.TrackItem;
 import com.example.playmood.model.TrackResponse;
@@ -10,6 +8,7 @@ import com.example.playmood.network.SpotifyAuthService;
 import com.example.playmood.network.SpotifyTrackService;
 import com.example.playmood.view.PlaylistView;
 
+import java.util.Random;
 import java.util.List;
 
 import retrofit2.Call;
@@ -56,20 +55,29 @@ public class PlaylistPresenter {
                 .getSpotifyApiInstance()
                 .create(SpotifyTrackService.class);
 
-        // Sesuaikan query pencarian berdasarkan mood
-        String query;
+        String[] happyKeywords = {"fun", "dance", "joyful", "upbeat", "party"};
+        String[] sadKeywords = {"slow", "melancholy", "broken", "emotional", "lonely"};
+        String[] neutralKeywords = {"lofi", "chill", "ambient", "relaxing", "instrumental"};
+        String[] angryKeywords = {"rock", "metal", "aggressive", "screamo", "grunge"};
+        String[] surprisedKeywords = {"edm", "exciting", "drop", "electronic", "intense"};
+
+        String[] keywords;
         switch (mood.toLowerCase()) {
             case "happy":
-                query = "happy upbeat party"; break;
+                keywords = happyKeywords; break;
             case "sad":
-                query = "sad emotional heartbreak"; break;
+                keywords = sadKeywords; break;
             case "neutral":
-                query = "calm chill relax"; break;
+                keywords = neutralKeywords; break;
             case "angry":
-                query = "angry rock metal"; break;
+                keywords = angryKeywords; break;
+            case "surprised":
+                keywords = surprisedKeywords; break;
             default:
-                query = "top hits"; break;
+                keywords = new String[]{"popular", "vibes", "chill"}; break;
         }
+
+        String query = keywords[new Random().nextInt(keywords.length)];
 
         Call<TrackResponse> call = trackService.searchTracks("Bearer " + token, query, "track", 15);
         call.enqueue(new Callback<TrackResponse>() {

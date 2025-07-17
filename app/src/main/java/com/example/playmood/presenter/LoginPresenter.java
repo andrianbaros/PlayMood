@@ -18,9 +18,9 @@ public class LoginPresenter {
         this.firebaseAuth = FirebaseAuth.getInstance();
     }
 
-    public void login(String username, String password) {
-        if (username.isEmpty()) {
-            loginView.onInputError("username", "Username tidak boleh kosong");
+    public void login(String loginInput, String password) {
+        if (loginInput.isEmpty()) {
+            loginView.onInputError("login", "Email/Username tidak boleh kosong");
             return;
         }
         if (password.isEmpty()) {
@@ -28,32 +28,41 @@ public class LoginPresenter {
             return;
         }
 
-        // Cari user berdasarkan username
-        Query query = reference.orderByChild("username").equalTo(username);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot data : snapshot.getChildren()) {
+        // Tentukan apakah loginInput adalah email atau username
+        if (loginInput.contains("@")) {
+            // Loginnya langsung via email
+            firebaseAuth.signInWithEmailAndPassword(loginInput, password)
+                    .addOnSuccessListener(auth -> loginView.onLoginSuccess())
+                    .addOnFailureListener(e ->
+                            loginView.onLoginError("Login gagal: " + e.getMessage()));
+        } else {
+            // Input adalah username
+            Query query = reference.orderByChild("username").equalTo(loginInput);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        DataSnapshot data = snapshot.getChildren().iterator().next();
                         UserModel user = data.getValue(UserModel.class);
                         if (user != null) {
                             String email = user.getEmail();
-
-                            // Login dengan email yang ditemukan
                             firebaseAuth.signInWithEmailAndPassword(email, password)
-                                    .addOnSuccessListener(authResult -> loginView.onLoginSuccess())
-                                    .addOnFailureListener(e -> loginView.onLoginError("Login gagal: " + e.getMessage()));
+                                    .addOnSuccessListener(auth -> loginView.onLoginSuccess())
+                                    .addOnFailureListener(e ->
+                                            loginView.onLoginError("Login gagal: " + e.getMessage()));
+                        } else {
+                            loginView.onLoginError("Data pengguna rusak");
                         }
+                    } else {
+                        loginView.onUserNotFound();
                     }
-                } else {
-                    loginView.onUserNotFound();
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                loginView.onLoginError("Error: " + error.getMessage());
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    loginView.onLoginError("Error: " + error.getMessage());
+                }
+            });
+        }
     }
+
 }

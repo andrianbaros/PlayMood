@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import java.util.regex.Pattern;
 
 public class SignupPresenter {
     private final SignupView signupView;
@@ -33,8 +34,11 @@ public class SignupPresenter {
             signupView.onInputError("username", "Username tidak boleh kosong");
             return;
         }
-        if (password.length() < 6) {
-            signupView.onInputError("password", "Password minimal 6 karakter");
+        // Validasi password: minimal 8 karakter, campuran huruf dan angka
+        String regex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+        if (!Pattern.matches(regex, password)) {
+            signupView.onInputError("password",
+                    "Password minimal 8 karakter dan harus mengandung huruf & angka");
             return;
         }
 
@@ -42,13 +46,15 @@ public class SignupPresenter {
                 .addOnSuccessListener(authResult -> {
                     FirebaseUser firebaseUser = auth.getCurrentUser();
                     if (firebaseUser != null) {
-                        // Buat objek user dan simpan ke Realtime Database
                         UserModel user = new UserModel(name, email, username, password);
                         database.child(username).setValue(user)
                                 .addOnSuccessListener(unused -> signupView.onSignUpSuccess())
-                                .addOnFailureListener(e -> signupView.onSignUpError("Gagal menyimpan data: " + e.getMessage()));
+                                .addOnFailureListener(e ->
+                                        signupView.onSignUpError("Gagal menyimpan data: " + e.getMessage()));
                     }
                 })
-                .addOnFailureListener(e -> signupView.onSignUpError("Gagal daftar: " + e.getMessage()));
+                .addOnFailureListener(e ->
+                        signupView.onSignUpError("Gagal daftar: " + e.getMessage()));
     }
+
 }

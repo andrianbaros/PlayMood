@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lavender"
+    android:background="@color/white"
     tools:context=".LoginActivity">
 
     <!-- CardView -->
@@ -26,18 +26,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="24dp"
-            android:background="@drawable/lavender_border">
+            android:background="">
+            <ImageView
+                android:id="@+id/myIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo" />
 
             <TextView
                 android:id="@+id/txtLoginTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                android:textColor="@color/lavender"
+                android:layout_marginBottom="24dp"
                 android:gravity="center"
-                android:layout_marginBottom="24dp" />
+                android:text="Sign In"
+                android:textColor="@color/lavender"
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/Login_Username"
@@ -49,7 +55,8 @@
                 android:background="@drawable/lavender_border"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp" />
 
@@ -64,7 +71,8 @@
                 android:background="@drawable/lavender_border"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp" />
 
@@ -72,18 +80,17 @@
                 android:id="@+id/Login_Button"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:text="Login"
-                android:textColor="@android:color/white"
-                android:backgroundTint="@color/lavender"
-                android:textSize="18sp"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/lavender_border" />
+                android:backgroundTint="@color/hijau"
+                android:text="Sign In"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/signupRedicrectText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Belum punya akun? Daftar di sini"
+                android:text="Doesn't have an account? Sign up here!"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:layout_gravity="center_horizontal"
@@ -94,7 +101,7 @@
                 android:id="@+id/forgotPasswordText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lupa password?"
+                android:text="Forgot Password?"
                 android:textColor="@color/purple_500"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="16dp"
