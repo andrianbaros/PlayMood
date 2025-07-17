@@ -5,6 +5,7 @@ import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -26,7 +27,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
     private boolean isPlaying = false;
-    private Handler handler = new Handler();
+    private Handler handler = new Handler(Looper.getMainLooper());
     private Runnable updateSeekBar;
 
     private String songUrl;

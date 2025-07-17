@@ -35,9 +35,11 @@ android {
 
 dependencies {
     implementation(libs.appcompat)
-    implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
+    // Ganti/duplikat baris ini:
+    implementation ("com.google.android.material:material:1.12.0")
 
     // ML Kit Face Detection
     implementation("com.google.mlkit:face-detection:16.1.5")
@@ -55,18 +57,18 @@ dependencies {
     // Spotify Auth SDK
     implementation("com.spotify.android:auth:1.2.5")
 
-    // Glide (untuk Java, gunakan annotationProcessor)
+    // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
-    // Retrofit & Gson Converter
+    // Retrofit & Gson
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    // OkHttp untuk HTTP Request ke Spotify API
+    // OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
-    // Gson untuk parsing JSON
+    // Gson
     implementation("com.google.code.gson:gson:2.10.1")
 
     // Testing
