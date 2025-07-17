@@ -19,13 +19,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="24dp"
+            android:background="@color/white">
             <ImageView
                 android:id="@+id/myIcon"
                 android:layout_width="match_parent"
@@ -48,32 +50,32 @@
                 android:id="@+id/Login_Username"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="Username"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/lavender_border"
                 android:drawableLeft="@drawable/person"
                 android:drawablePadding="12dp"
-                android:background="@drawable/lavender_border"
+                android:hint="Username"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/Login_Password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="Password"
-                android:inputType="textPassword"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/lavender_border"
                 android:drawableLeft="@drawable/lock"
                 android:drawablePadding="12dp"
-                android:background="@drawable/lavender_border"
+                android:hint="Password"
+                android:inputType="textPassword"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:textSize="16sp"
-                android:layout_marginTop="16dp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/Login_Button"
@@ -89,24 +91,23 @@
                 android:id="@+id/signupRedicrectText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
                 android:text="Doesn't have an account? Sign up here!"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp" />
+                android:textSize="14sp" />
 
 
             <TextView
                 android:id="@+id/forgotPasswordText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forgot Password?"
-                android:textColor="@color/purple_500"
                 android:layout_gravity="center_horizontal"
-                android:paddingTop="16dp"
                 android:clickable="true"
-                android:focusable="true"/>
-
+                android:focusable="true"
+                android:paddingTop="16dp"
+                android:text="Forgot Password?"
+                android:textColor="@color/purple_500" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
