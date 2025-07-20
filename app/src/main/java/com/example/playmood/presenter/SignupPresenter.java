@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class SignupPresenter {
@@ -34,27 +36,33 @@ public class SignupPresenter {
             signupView.onInputError("username", "Username tidak boleh kosong");
             return;
         }
-        // Validasi password: minimal 8 karakter, campuran huruf dan angka
+
+        // Validasi password: minimal 8 karakter, kombinasi huruf dan angka
         String regex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
         if (!Pattern.matches(regex, password)) {
-            signupView.onInputError("password",
-                    "Password minimal 8 karakter dan harus mengandung huruf & angka");
+            signupView.onInputError("password", "Password minimal 8 karakter dan harus mengandung huruf & angka");
             return;
         }
 
+        // Proses registrasi akun
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
                     FirebaseUser firebaseUser = auth.getCurrentUser();
                     if (firebaseUser != null) {
-                        UserModel user = new UserModel(name, email, username, password);
-                        database.child(username).setValue(user)
+                        String uid = firebaseUser.getUid();
+
+                        // Buat user model dengan followers/following kosong
+                        UserModel user = new UserModel(uid, name, email, username, password);
+                        user.setFollowers(new HashMap<>());
+                        user.setFollowing(new HashMap<>());
+                        user.setProfileImageUrl(""); // Biar tidak null di Firebase
+
+                        // Simpan data user ke Firebase
+                        database.child(uid).setValue(user)
                                 .addOnSuccessListener(unused -> signupView.onSignUpSuccess())
-                                .addOnFailureListener(e ->
-                                        signupView.onSignUpError("Gagal menyimpan data: " + e.getMessage()));
+                                .addOnFailureListener(e -> signupView.onSignUpError("Gagal menyimpan data: " + e.getMessage()));
                     }
                 })
-                .addOnFailureListener(e ->
-                        signupView.onSignUpError("Gagal daftar: " + e.getMessage()));
+                .addOnFailureListener(e -> signupView.onSignUpError("Gagal daftar: " + e.getMessage()));
     }
-
 }

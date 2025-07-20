@@ -38,8 +38,8 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
 
-    // Ganti/duplikat baris ini:
-    implementation ("com.google.android.material:material:1.12.0")
+    // Material
+    implementation("com.google.android.material:material:1.12.0")
 
     // ML Kit Face Detection
     implementation("com.google.mlkit:face-detection:16.1.5")
@@ -70,6 +70,12 @@ dependencies {
 
     // Gson
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // Activity KTX
+    implementation("androidx.activity:activity-ktx:1.7.2")
+
+    // CircleImageView
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     // Testing
     testImplementation(libs.junit)

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.playmood.model.UserModel;
 import com.example.playmood.presenter.LoginPresenter;
 import com.example.playmood.view.LoginView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -87,8 +88,18 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void onLoginSuccess() {
+    public void onLoginSuccess(UserModel user) {
         Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
+
+        // Simpan ke SharedPreferences
+        getSharedPreferences("user", MODE_PRIVATE)
+                .edit()
+                .putString("username", user.getUsername())
+                .putString("email", user.getEmail())
+                .putString("profileImageUrl", user.getProfileImageUrl() != null ? user.getProfileImageUrl() : "")
+                .apply();
+
+        // Lanjut ke RouterActivity
         startActivity(new Intent(this, RouterActivity.class));
         finish();
     }

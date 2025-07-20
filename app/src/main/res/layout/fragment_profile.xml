@@ -1,14 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:background="#F5F5F5">
 
-    <TextView
-        android:id="@+id/text_profile"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Profile Fragment"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-</FrameLayout>
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Profile Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="20dp"
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center">
+
+            <FrameLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <!-- Foto Profil -->
+                <ImageView
+                    android:id="@+id/imageViewProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/circle_white_bg"
+                    android:src="@drawable/circle_white_bg" />
+
+                <!-- Tombol Plus (ikon tambah) di kanan atas -->
+                <ImageView
+                    android:id="@+id/btnAddProfileImage"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="end|top"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/circle_white_bg"
+                    android:contentDescription="Tambah Foto"
+                    android:elevation="4dp"
+                    android:padding="6dp"
+                    android:src="@drawable/add"
+                    android:clickable="true"
+                    android:focusable="true" />
+            </FrameLayout>
+
+            <!-- Email -->
+            <TextView
+                android:id="@+id/textEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="soroushnorozyui@gmail.com"
+                android:textSize="12sp"
+                android:textColor="#888888" />
+
+            <!-- Username -->
+            <TextView
+                android:id="@+id/textUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Soroushnrz"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Followers and Followees -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/textFollowersCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="778"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Followers"
+                    android:layout_marginEnd="16dp" />
+
+                <TextView
+                    android:id="@+id/textFolloweesCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="243"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Followees" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!-- Playlist Title -->
+        <TextView
+            android:id="@+id/textPublicPlaylists"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PUBLIC PLAYLISTS"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Playlist List -->
+        <LinearLayout
+            android:id="@+id/playlistContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- You can dynamically add playlist items or use RecyclerView -->
+            <include layout="@layout/item_playlist" />
+            <include layout="@layout/item_playlist" />
+            <include layout="@layout/item_playlist" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

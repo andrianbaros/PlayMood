@@ -13,6 +13,9 @@ public class TrackItem {
     @SerializedName("album")
     public Album album;
 
+    @SerializedName("preview_url")
+    public String preview_url;
+
     public static class Artist {
         @SerializedName("name")
         public String name;

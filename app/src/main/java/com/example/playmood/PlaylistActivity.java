@@ -64,5 +64,5 @@ public class PlaylistActivity extends AppCompatActivity implements PlaylistView 
     @Override
     public void onError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-}
+
+}}
