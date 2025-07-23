@@ -163,6 +163,34 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             songListContainer.addView(itemView);
         }
     }
+    private void fetchDuration(AlbumModel album, TextView durationView) {
+        // Jika sudah ada, tidak perlu fetch lagi
+        if (album.getTime() != null && !album.getTime().isEmpty()) {
+            durationView.setText(album.getTime());
+            return;
+        }
+
+        durationView.setText("..."); // tampilkan loading sementara
+
+        android.media.MediaPlayer mediaPlayer = new android.media.MediaPlayer();
+        try {
+            mediaPlayer.setDataSource(album.getPreviewUrl() != null ? album.getPreviewUrl() : album.getSongUrl());
+            mediaPlayer.prepareAsync();
+            mediaPlayer.setOnPreparedListener(mp -> {
+                int durationMs = mp.getDuration(); // durasi dalam milidetik
+                int minutes = (durationMs / 1000) / 60;
+                int seconds = (durationMs / 1000) % 60;
+                String timeFormatted = String.format("%d:%02d", minutes, seconds);
+                durationView.setText(timeFormatted);
+                album.setTime(timeFormatted); // simpan agar tidak load ulang
+                mp.release();
+            });
+        } catch (Exception e) {
+            durationView.setText("0:00");
+            e.printStackTrace();
+        }
+    }
+
 
     private void displayPlaylists(List<AlbumModel> playlists) {
         playlistListContainer.removeAllViews();
@@ -183,7 +211,8 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
             title.setText(playlist.getTitle());
             artist.setText(playlist.getArtist());
-            duration.setText("5:33"); // Placeholder
+
+            fetchDuration(playlist, duration);
 
             Glide.with(getContext())
                     .load(playlist.getCoverUrl())
@@ -194,6 +223,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             playlistListContainer.addView(itemView);
         }
     }
+
 
     private void filterPlaylists(String query) {
         if (query == null || query.trim().isEmpty()) {

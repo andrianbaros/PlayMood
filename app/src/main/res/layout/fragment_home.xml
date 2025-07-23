@@ -63,7 +63,7 @@
         <LinearLayout
             android:id="@+id/bannerAlbum"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="102dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_album_card"
             android:orientation="vertical"
@@ -72,14 +72,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Album"
+                android:text="Welcome!"
+                android:textStyle="bold"
                 android:textColor="#FFFFFF" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Happier Than Ever"
-                android:textSize="20sp"
+                android:text="Here's some songs we recommend"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="4dp" />
@@ -87,7 +88,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Billie Eilish"
+                android:text="(Click songs below to play!)"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="2dp" />
         </LinearLayout>
@@ -120,7 +121,7 @@
             android:id="@+id/textPublicPlaylists"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PUBLIC PLAYLISTS"
+            android:text="Available Songs"
             android:textStyle="bold"
             android:textColor="#000000"
             android:layout_marginTop="16dp"

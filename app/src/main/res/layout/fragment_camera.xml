@@ -9,14 +9,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDetectMood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Deteksi Mood"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/btn_shutter"
+        android:backgroundTint="@null"
+        android:elevation="6dp"
+        android:text="" />
+
+
+
 
     <TextView
         android:id="@+id/txtMood"
