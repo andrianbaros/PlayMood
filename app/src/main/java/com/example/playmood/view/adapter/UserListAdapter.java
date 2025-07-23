@@ -1,4 +1,4 @@
-package com.example.playmood.view;
+package com.example.playmood.view.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.playmood.R;
 import com.example.playmood.model.UserModel;
+import com.example.playmood.view.OtherUserProfileFragment;
 
 import java.util.List;
 

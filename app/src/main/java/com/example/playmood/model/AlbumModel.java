@@ -3,6 +3,7 @@ package com.example.playmood.model;
 import java.util.List;
 
 public class AlbumModel {
+
     private String title;
     private List<String> artist;
     private String cover_url;

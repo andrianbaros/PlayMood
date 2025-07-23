@@ -1,4 +1,4 @@
-package com.example.playmood.view;
+package com.example.playmood.view.adapter;
 
 import android.content.Context;
 import android.media.MediaPlayer;

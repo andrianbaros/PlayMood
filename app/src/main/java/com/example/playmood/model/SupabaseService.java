@@ -5,6 +5,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Query;
+;
 
 public interface SupabaseService {
 
@@ -13,6 +15,7 @@ public interface SupabaseService {
             "Authorization: Bearer sb_secret_pPtrqnOgYBpKT-erW4dK0w_HgY1sLuD",
             "Content-Type: application/json"
     })
-    @GET("rest/v1/playmood?select=*")
-    Call<List<AlbumModel>> getAlbums();
+    @GET("rest/v1/playmood") // benar
+    Call<List<AlbumModel>> getAlbums(@Query("select") String select);
+
 }

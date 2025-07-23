@@ -35,7 +35,7 @@ public class HomePresenter implements HomeContract.Presenter {
         SupabaseService service = retrofit.create(SupabaseService.class);
 
         // Panggil endpoint Supabase
-        Call<List<AlbumModel>> call = service.getAlbums();
+        Call<List<AlbumModel>> call = service.getAlbums("*");
         call.enqueue(new Callback<List<AlbumModel>>() {
             @Override
             public void onResponse(Call<List<AlbumModel>> call, Response<List<AlbumModel>> response) {

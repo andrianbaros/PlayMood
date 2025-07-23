@@ -24,7 +24,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/back"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:contentDescription="Back" />
 
             <TextView
                 android:layout_width="0dp"
@@ -35,8 +36,6 @@
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
-
         </LinearLayout>
 
         <!-- Album Art -->
@@ -47,7 +46,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/rounded_image_background" />
 
-        <!-- Title & Artist -->
+        <!-- Title -->
         <TextView
             android:id="@+id/songTitle"
             android:layout_width="match_parent"
@@ -59,17 +58,15 @@
             android:paddingTop="12dp"
             android:gravity="center" />
 
-        <!-- Container untuk artis dan tombol favorit -->
+        <!-- Artist & Favorite Button -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="8dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:paddingTop="4dp"
+            android:paddingBottom="12dp">
 
-            <!-- Nama Artis -->
             <TextView
                 android:id="@+id/songArtist"
                 android:layout_width="0dp"
@@ -79,13 +76,13 @@
                 android:textSize="16sp"
                 android:textColor="#777777" />
 
-            <!-- Tombol Favorite -->
             <ImageButton
                 android:id="@+id/btnFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/like"
+                android:src="@drawable/love_selector"
                 android:background="@android:color/transparent"
+                android:contentDescription="Favorite Button"
                 android:padding="8dp" />
         </LinearLayout>
 
@@ -100,21 +97,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:paddingTop="4dp"
             android:paddingBottom="8dp">
 
             <TextView
                 android:id="@+id/startTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0:00" />
+                android:text="0:00"
+                android:textSize="14sp"
+                android:textColor="#888888" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/endTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0:00"
-                android:layout_weight="1"
-                android:gravity="end" />
+                android:textSize="14sp"
+                android:textColor="#888888" />
         </LinearLayout>
 
         <!-- Playback Controls -->
@@ -123,21 +128,24 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:paddingTop="8dp">
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp">
 
             <ImageButton
                 android:id="@+id/btnShuffle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_rotate"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:contentDescription="Shuffle" />
 
             <ImageButton
                 android:id="@+id/btnPrevious"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_media_previous"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:contentDescription="Previous" />
 
             <ImageButton
                 android:id="@+id/btnPlayPause"
@@ -145,21 +153,23 @@
                 android:layout_height="64dp"
                 android:background="@android:color/transparent"
                 android:src="@android:drawable/ic_media_play"
-                 />
+                android:contentDescription="Play or Pause" />
 
             <ImageButton
                 android:id="@+id/btnNext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_media_next"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:contentDescription="Next" />
 
             <ImageButton
                 android:id="@+id/btnRepeat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_revert"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:contentDescription="Repeat" />
         </LinearLayout>
 
     </LinearLayout>

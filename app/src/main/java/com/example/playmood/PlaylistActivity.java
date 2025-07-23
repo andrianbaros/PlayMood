@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.playmood.view.PlaylistAdapter;
+import com.example.playmood.view.adapter.PlaylistAdapter;
 import com.example.playmood.model.TrackItem;
 import com.example.playmood.presenter.PlaylistPresenter;
 import com.example.playmood.view.PlaylistView;

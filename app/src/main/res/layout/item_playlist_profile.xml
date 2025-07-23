@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemContainer"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
+    android:layout_height="wrap_content"
+    android:minHeight="64dp"
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:padding="8dp"
+    android:background="?android:attr/selectableItemBackground"
     android:layout_marginBottom="4dp">
 
+    <!-- Cover Lagu -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/rounded_image_background"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_image_background"
+        android:contentDescription="Cover" />
 
+    <!-- Info Lagu -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -23,34 +29,41 @@
 
         <TextView
             android:id="@+id/textViewTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dont Smile At Me"
+            android:text="Judul Lagu"
             android:textStyle="bold"
+            android:textSize="14sp"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:maxLines="1"
+            android:ellipsize="end" />
 
         <TextView
             android:id="@+id/textViewSubtitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Billie Eilish"
+            android:text="Nama Artis"
+            android:textSize="12sp"
             android:textColor="#888888"
-            android:textSize="12sp" />
+            android:maxLines="1"
+            android:ellipsize="end" />
     </LinearLayout>
 
+    <!-- Durasi -->
     <TextView
         android:id="@+id/textViewDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5:33"
+        android:text="3:45"
         android:textSize="12sp"
         android:textColor="#888888"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginHorizontal="8dp" />
 
+    <!-- Tombol Play -->
     <ImageView
         android:id="@+id/playButton"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/play" />
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/play"
+        android:contentDescription="Play" />
 </LinearLayout>

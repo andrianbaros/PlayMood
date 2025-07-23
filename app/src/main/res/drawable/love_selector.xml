@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Saat tombol dalam keadaan dipilih -->
+    <item android:state_selected="true" android:drawable="@drawable/favorit" />
+
+    <!-- Saat tombol tidak dipilih -->
+    <item android:drawable="@drawable/like" />
+</selector>

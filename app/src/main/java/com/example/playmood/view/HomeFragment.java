@@ -2,13 +2,16 @@ package com.example.playmood.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,13 +26,20 @@ import com.example.playmood.presenter.HomePresenter;
 import com.example.playmood.presenter.contract.HomeContract;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class HomeFragment extends Fragment implements HomeContract.View {
 
     private HomeContract.Presenter presenter;
     private LinearLayout songListContainer;
+    private LinearLayout playlistListContainer;
     private List<AlbumModel> fullAlbumList = new ArrayList<>();
+    private AutoCompleteTextView searchView;
+
+    private List<AlbumModel> publicPlaylists = new ArrayList<>();
 
     public HomeFragment() {}
 
@@ -42,24 +52,33 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         songListContainer = view.findViewById(R.id.songListContainer);
-        SearchView searchView = view.findViewById(R.id.searchView);
+        playlistListContainer = view.findViewById(R.id.playlistListContainer);
+        searchView = view.findViewById(R.id.searchAutoComplete);
 
-        // SearchView selalu terlihat (dari XML) -> tambahkan pencarian
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                filterAlbums(query);
-                return true;
+        // Tambahkan listener saat user mengetik
+        searchView.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterPlaylists(s.toString());
             }
+            @Override public void afterTextChanged(Editable s) {}
+        });
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterAlbums(newText);
-                return true;
+        // Tangani saat item suggestion diklik
+        searchView.setOnItemClickListener((parent, v, position, id) -> {
+            String selected = (String) parent.getItemAtPosition(position);
+            searchView.setText(selected);
+
+            // Temukan lagu yang cocok dari list
+            for (AlbumModel album : fullAlbumList) {
+                if (album.getTitle().equalsIgnoreCase(selected) || album.getArtist().equalsIgnoreCase(selected)) {
+                    openPlayer(album);
+                    break; // stop setelah ketemu
+                }
             }
         });
 
-        // Inisialisasi presenter dan ambil data
+        // Presenter ambil data album
         presenter = new HomePresenter(this);
         presenter.onHomeLoaded();
 
@@ -71,8 +90,52 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         if (albums == null || getContext() == null) return;
 
         Log.d("AlbumCheck", "Jumlah album: " + albums.size());
-        fullAlbumList = albums; // Simpan untuk pencarian/filter
-        displayAlbums(albums);
+        fullAlbumList = albums;
+
+        // Tampilkan lagu populer
+        showPopularSongs();
+
+        // Simpan dan tampilkan playlist publik (10 pertama)
+        publicPlaylists = fullAlbumList.size() > 10
+                ? fullAlbumList.subList(0, 10)
+                : new ArrayList<>(fullAlbumList);
+
+        displayPlaylists(publicPlaylists); // ✅ tampilkan playlist awal tanpa filter
+
+        // Optional: tampilkan suggestion lain kalau kamu ingin ada autocomplete, dsb
+        showSuggestions();
+    }
+
+    private void showSuggestions() {
+        List<String> suggestions = new ArrayList<>();
+
+        for (AlbumModel album : fullAlbumList) {
+            suggestions.add(album.getTitle());
+            suggestions.add(album.getArtist());
+        }
+
+        // Hapus duplikat
+        Set<String> uniqueSet = new LinkedHashSet<>(suggestions);
+        List<String> uniqueSuggestions = new ArrayList<>(uniqueSet);
+
+        // Pasang adapter untuk suggestion dropdown
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getContext(),
+                android.R.layout.simple_dropdown_item_1line,
+                uniqueSuggestions
+        );
+
+        searchView.setAdapter(adapter);
+        searchView.setThreshold(1); // Tampilkan suggestion setelah 1 karakter
+    }
+
+    private void showPopularSongs() {
+        List<AlbumModel> randomAlbums = new ArrayList<>(fullAlbumList);
+        Collections.shuffle(randomAlbums);
+        if (randomAlbums.size() > 5) {
+            randomAlbums = randomAlbums.subList(0, 5);
+        }
+        displayAlbums(randomAlbums);
     }
 
     private void displayAlbums(List<AlbumModel> albums) {
@@ -96,22 +159,50 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                     .centerCrop()
                     .into(imageCover);
 
-            playButton.setOnClickListener(v -> {
-                Intent intent = new Intent(getContext(), MusicPlayerActivity.class);
-                intent.putExtra("TITLE", album.getTitle());
-                intent.putExtra("ARTIST", album.getArtist());
-                intent.putExtra("COVER", album.getCoverUrl());
-                intent.putExtra("SONGURL", album.getSongUrl());
-                startActivity(intent);
-            });
-
+            playButton.setOnClickListener(v -> openPlayer(album));
             songListContainer.addView(itemView);
         }
     }
 
-    private void filterAlbums(String query) {
-        List<AlbumModel> filteredList = new ArrayList<>();
+    private void displayPlaylists(List<AlbumModel> playlists) {
+        playlistListContainer.removeAllViews();
+        LayoutInflater inflater = LayoutInflater.from(getContext());
 
+        List<AlbumModel> limitedPlaylists = playlists.size() > 10
+                ? playlists.subList(0, 10)
+                : playlists;
+
+        for (AlbumModel playlist : limitedPlaylists) {
+            View itemView = inflater.inflate(R.layout.item_playlist, playlistListContainer, false);
+
+            ImageView imageView = itemView.findViewById(R.id.imageView);
+            TextView title = itemView.findViewById(R.id.textViewTitle);
+            TextView artist = itemView.findViewById(R.id.textViewSubtitle);
+            TextView duration = itemView.findViewById(R.id.textViewDuration);
+            ImageView playBtn = itemView.findViewById(R.id.playButton);
+
+            title.setText(playlist.getTitle());
+            artist.setText(playlist.getArtist());
+            duration.setText("5:33"); // Placeholder
+
+            Glide.with(getContext())
+                    .load(playlist.getCoverUrl())
+                    .placeholder(R.drawable.rounded_image_background)
+                    .into(imageView);
+
+            itemView.setOnClickListener(v -> openPlayer(playlist));
+            playlistListContainer.addView(itemView);
+        }
+    }
+
+    private void filterPlaylists(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            // Kalau kosong, tampilkan playlist publik (default)
+            displayPlaylists(publicPlaylists);
+            return;
+        }
+
+        List<AlbumModel> filteredList = new ArrayList<>();
         for (AlbumModel album : fullAlbumList) {
             if (album.getTitle().toLowerCase().contains(query.toLowerCase()) ||
                     album.getArtist().toLowerCase().contains(query.toLowerCase())) {
@@ -119,11 +210,20 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             }
         }
 
-        displayAlbums(filteredList);
+        displayPlaylists(filteredList);
+    }
+
+    private void openPlayer(AlbumModel album) {
+        Intent intent = new Intent(getContext(), MusicPlayerActivity.class);
+        intent.putExtra("TITLE", album.getTitle());
+        intent.putExtra("ARTIST", album.getArtist());
+        intent.putExtra("COVER", album.getCoverUrl());
+        intent.putExtra("SONGURL", album.getSongUrl());
+        startActivity(intent);
     }
 
     @Override
     public void showWelcomeMessage(String message) {
-        // Optional: Tampilkan pesan selamat datang
+        // Optional
     }
 }
