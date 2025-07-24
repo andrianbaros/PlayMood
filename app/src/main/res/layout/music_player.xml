@@ -39,14 +39,16 @@
         </LinearLayout>
 
         <!-- Album Art -->
+
+        <!-- Title -->
+
         <ImageView
             android:id="@+id/albumArt"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="360dp"
             android:scaleType="centerCrop"
             android:src="@drawable/rounded_image_background" />
 
-        <!-- Title -->
         <TextView
             android:id="@+id/songTitle"
             android:layout_width="match_parent"
@@ -126,8 +128,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="16dp">
 
@@ -135,41 +137,41 @@
                 android:id="@+id/btnShuffle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_rotate"
                 android:background="@android:color/transparent"
-                android:contentDescription="Shuffle" />
+                android:contentDescription="Shuffle"
+                android:src="@android:drawable/ic_menu_rotate" />
 
             <ImageButton
                 android:id="@+id/btnPrevious"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_media_previous"
                 android:background="@android:color/transparent"
-                android:contentDescription="Previous" />
+                android:contentDescription="Previous"
+                android:src="@android:drawable/ic_media_previous" />
 
             <ImageButton
                 android:id="@+id/btnPlayPause"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:background="@android:color/transparent"
-                android:src="@android:drawable/ic_media_play"
-                android:contentDescription="Play or Pause" />
+                android:contentDescription="Play or Pause"
+                android:src="@android:drawable/ic_media_play" />
 
             <ImageButton
                 android:id="@+id/btnNext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_media_next"
                 android:background="@android:color/transparent"
-                android:contentDescription="Next" />
+                android:contentDescription="Next"
+                android:src="@android:drawable/ic_media_next" />
 
             <ImageButton
                 android:id="@+id/btnRepeat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_revert"
                 android:background="@android:color/transparent"
-                android:contentDescription="Repeat" />
+                android:contentDescription="Repeat"
+                android:src="@android:drawable/ic_menu_revert" />
         </LinearLayout>
 
     </LinearLayout>

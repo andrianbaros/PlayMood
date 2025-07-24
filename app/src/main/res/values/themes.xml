@@ -1,8 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.Playmood" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/hijau</item>
+
+        <!-- Biarkan sistem menggambar status bar -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+        <!-- Pastikan konten tidak masuk ke dalam status bar -->
+        <item name="android:fitsSystemWindows">true</item>
+
+        <!-- Agar icon status bar tetap gelap di atas warna terang -->
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.Playmood" parent="Base.Theme.Playmood" />

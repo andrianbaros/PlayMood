@@ -39,8 +39,6 @@ public class RouterActivity extends AppCompatActivity {
                 selectedFragment = homeFragment;
             } else if (id == R.id.navbar_camera) {
                 selectedFragment = cameraFragment;
-            } else if (id == R.id.navbar_love) {
-                selectedFragment = loveFragment;
             } else if (id == R.id.navbar_profile) {
                 selectedFragment = profileFragment;
             } else {

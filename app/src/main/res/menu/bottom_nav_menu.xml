@@ -7,10 +7,7 @@
         android:id="@+id/navbar_camera"
         android:icon="@drawable/camera"
         android:title="Camera" />
-    <item
-        android:id="@+id/navbar_love"
-        android:icon="@drawable/like"
-        android:title="Love" />
+
     <item
         android:id="@+id/navbar_profile"
         android:icon="@drawable/person"

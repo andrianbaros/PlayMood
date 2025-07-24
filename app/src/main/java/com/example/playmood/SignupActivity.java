@@ -76,6 +76,8 @@ public class SignupActivity extends AppCompatActivity implements SignupView {
             case "password":
                 signupPassword.setError(message);
                 break;
+            case "profileImageUrl":
+
         }
     }
 }

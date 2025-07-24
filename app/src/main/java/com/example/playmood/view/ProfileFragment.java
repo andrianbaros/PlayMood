@@ -35,7 +35,7 @@ import retrofit2.Response;
 public class ProfileFragment extends Fragment {
 
     private ImageView imageViewProfile;
-    private TextView textEmail, textUsername, textFollowersCount, textFolloweesCount;
+    private TextView textEmail, textUsername;
     private LinearLayout playlistContainerProfile;
 
     private DatabaseReference usersRef;
@@ -51,8 +51,6 @@ public class ProfileFragment extends Fragment {
         imageViewProfile = view.findViewById(R.id.imageViewProfile);
         textEmail = view.findViewById(R.id.textEmail);
         textUsername = view.findViewById(R.id.textUsername);
-        textFollowersCount = view.findViewById(R.id.textFollowersCount);
-        textFolloweesCount = view.findViewById(R.id.textFolloweesCount);
         playlistContainerProfile = view.findViewById(R.id.playlistContainerProfile );
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -79,8 +77,6 @@ public class ProfileFragment extends Fragment {
                 if (user != null) {
                     textEmail.setText(user.getEmail());
                     textUsername.setText(user.getUsername());
-                    textFollowersCount.setText(String.valueOf(user.getFollowers() != null ? user.getFollowers().size() : 0));
-                    textFolloweesCount.setText(String.valueOf(user.getFollowing() != null ? user.getFollowing().size() : 0));
 
                     if (user.getProfileImageUrl() != null && !user.getProfileImageUrl().isEmpty()) {
                         Glide.with(requireContext())

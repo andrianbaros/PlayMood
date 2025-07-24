@@ -29,8 +29,8 @@ public interface SupabaseFavoriteService {
     })
     @GET("favorites")
     Call<List<JsonObject>> getFavorites(
-            @Query(value = "user_id", encoded = true) String userId,
-            @Query(value = "song_url", encoded = true) String songUrl
+            @Query("user_id") String userIdEq,
+            @Query("song_url") String songUrlEq
     );
 
     @Headers({
@@ -39,7 +39,7 @@ public interface SupabaseFavoriteService {
     })
     @DELETE("favorites")
     Call<Void> deleteFavorite(
-            @Query("user_id") String userIdFilter,
-            @Query("song_url") String songUrlFilter
+            @Query("user_id") String userIdEq,
+            @Query("song_url") String songUrlEq
     );
 }

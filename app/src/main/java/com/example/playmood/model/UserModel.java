@@ -11,13 +11,10 @@ public class UserModel {
     private String password;
     private String profileImageUrl;
 
-    private Map<String, Boolean> followers;
-    private Map<String, Boolean> following;
 
     // Constructor kosong
     public UserModel() {
-        this.followers = new HashMap<>();
-        this.following = new HashMap<>();
+
         this.profileImageUrl = "";
     }
 
@@ -29,8 +26,6 @@ public class UserModel {
         this.username = username;
         this.password = password;
         this.profileImageUrl = "";
-        this.followers = new HashMap<>();
-        this.following = new HashMap<>();
     }
 
     // Getter & Setter untuk uid
@@ -63,13 +58,7 @@ public class UserModel {
         return profileImageUrl != null ? profileImageUrl : "";
     }
 
-    public Map<String, Boolean> getFollowers() {
-        return followers != null ? followers : new HashMap<>();
-    }
 
-    public Map<String, Boolean> getFollowing() {
-        return following != null ? following : new HashMap<>();
-    }
 
     // Setters lainnya
     public void setName(String name) {
@@ -92,11 +81,5 @@ public class UserModel {
         this.profileImageUrl = (profileImageUrl != null) ? profileImageUrl : "";
     }
 
-    public void setFollowers(Map<String, Boolean> followers) {
-        this.followers = (followers != null) ? followers : new HashMap<>();
-    }
 
-    public void setFollowing(Map<String, Boolean> following) {
-        this.following = (following != null) ? following : new HashMap<>();
-    }
 }

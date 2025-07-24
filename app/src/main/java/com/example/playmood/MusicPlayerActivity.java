@@ -186,7 +186,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     private void checkIfFavorite() {
         SupabaseFavoriteService service = RetrofitClient.getSupabaseInstance().create(SupabaseFavoriteService.class);
-        service.getFavorites(userId, "eq." + songUrl).enqueue(new Callback<List<JsonObject>>() {
+        service.getFavorites("eq." + userId, "eq." + songUrl).enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -219,23 +219,20 @@ public class MusicPlayerActivity extends AppCompatActivity {
                     btnFavorite.setSelected(true);
                     Toast.makeText(MusicPlayerActivity.this, "Ditambahkan ke Favorit", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MusicPlayerActivity.this, "Gagal menyimpan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MusicPlayerActivity.this, "Gagal menyimpan ke Favorit", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                Toast.makeText(MusicPlayerActivity.this, "Kesalahan koneksi", Toast.LENGTH_SHORT).show();
-                Log.e("SUPABASE_ERROR", "Gagal koneksi: " + t.getMessage(), t);
+                Toast.makeText(MusicPlayerActivity.this, "Gagal koneksi", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void removeFavoriteFromSupabase() {
         SupabaseFavoriteService service = RetrofitClient.getSupabaseInstance().create(SupabaseFavoriteService.class);
-        String encodedSongUrl = Uri.encode(songUrl);
-
-        service.deleteFavorite("eq." + userId, "eq." + encodedSongUrl).enqueue(new Callback<Void>() {
+        service.deleteFavorite("eq." + userId, "eq." + songUrl).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
@@ -243,17 +240,17 @@ public class MusicPlayerActivity extends AppCompatActivity {
                     btnFavorite.setSelected(false);
                     Toast.makeText(MusicPlayerActivity.this, "Dihapus dari Favorit", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MusicPlayerActivity.this, "Gagal menghapus", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MusicPlayerActivity.this, "Gagal menghapus dari Favorit", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(MusicPlayerActivity.this, "Kesalahan koneksi", Toast.LENGTH_SHORT).show();
-                Log.e("SUPABASE_ERROR", "Gagal koneksi hapus: " + t.getMessage(), t);
+                Toast.makeText(MusicPlayerActivity.this, "Gagal koneksi", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     @Override
     protected void onDestroy() {

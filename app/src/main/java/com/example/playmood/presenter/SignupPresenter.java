@@ -53,8 +53,7 @@ public class SignupPresenter {
 
                         // Buat user model dengan followers/following kosong
                         UserModel user = new UserModel(uid, name, email, username, password);
-                        user.setFollowers(new HashMap<>());
-                        user.setFollowing(new HashMap<>());
+
                         user.setProfileImageUrl(""); // Biar tidak null di Firebase
 
                         // Simpan data user ke Firebase
