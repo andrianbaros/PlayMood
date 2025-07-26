@@ -3,7 +3,7 @@ package com.example.playmood.presenter;
 import androidx.annotation.NonNull;
 
 import com.example.playmood.model.UserModel;
-import com.example.playmood.view.LoginView;
+import com.example.playmood.view.auth.view.LoginView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;

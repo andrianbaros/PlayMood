@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.playmood.R;
-import com.example.playmood.model.TrackItem;
+import com.example.playmood.network.respone.TrackItem;
 
 import java.io.IOException;
 import java.util.List;

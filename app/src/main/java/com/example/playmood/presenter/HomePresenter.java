@@ -3,7 +3,7 @@ package com.example.playmood.presenter;
 import android.util.Log;
 
 import com.example.playmood.model.AlbumModel;
-import com.example.playmood.model.SupabaseService;
+import com.example.playmood.network.service.SupabaseService;
 import com.example.playmood.presenter.contract.HomeContract;
 
 import java.util.List;

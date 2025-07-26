@@ -1,12 +1,12 @@
 package com.example.playmood.presenter;
 
-import com.example.playmood.model.TokenResponse;
-import com.example.playmood.model.TrackItem;
-import com.example.playmood.model.TrackResponse;
+import com.example.playmood.network.respone.TokenResponse;
+import com.example.playmood.network.respone.TrackItem;
+import com.example.playmood.network.respone.TrackResponse;
 import com.example.playmood.network.RetrofitClient;
-import com.example.playmood.network.SpotifyAuthService;
-import com.example.playmood.network.SpotifyTrackService;
-import com.example.playmood.view.PlaylistView;
+import com.example.playmood.network.service.SpotifyAuthService;
+import com.example.playmood.network.service.SpotifyTrackService;
+import com.example.playmood.view.music.view.PlaylistView;
 
 import java.util.Random;
 import java.util.List;

@@ -3,7 +3,7 @@ package com.example.playmood.presenter;
 import android.util.Log;
 
 import com.example.playmood.model.MoodModel;
-import com.example.playmood.view.MainView;
+import com.example.playmood.view.home.MainView;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.*;
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5">
@@ -22,66 +23,52 @@
             android:gravity="center_horizontal"
             android:layout_gravity="center">
 
-            <FrameLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="true"
-                android:focusable="true">
+            <!-- Profile Image with Border -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="60dp"
+                app:cardElevation="4dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true">
 
-                <!-- Foto Profil -->
                 <ImageView
                     android:id="@+id/imageViewProfile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle_white_bg"
-                    android:src="@drawable/circle_white_bg" />
-
-                <!-- Tombol Plus -->
-                <ImageView
-                    android:id="@+id/btnAddProfileImage"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="end|top"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/circle_white_bg"
-                    android:contentDescription="Tambah Foto"
-                    android:elevation="4dp"
-                    android:padding="6dp"
-                    android:src="@drawable/add"
-                    android:clickable="true"
-                    android:focusable="true" />
-            </FrameLayout>
+                    android:contentDescription="Profile Image" />
+            </androidx.cardview.widget.CardView>
 
             <!-- Email -->
             <TextView
                 android:id="@+id/textEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="..."
+                android:text="email@example.com"
                 android:textSize="12sp"
-                android:textColor="#888888" />
+                android:textColor="#888888"
+                android:layout_marginBottom="4dp" />
 
             <!-- Username -->
             <TextView
                 android:id="@+id/textUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="..."
+                android:text="Username"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
                 android:layout_marginBottom="8dp" />
 
-            <!-- Followers and Followees -->
+            <!-- Followers and Followees (Kosong) -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
-
-
             </LinearLayout>
         </LinearLayout>
 
@@ -100,8 +87,6 @@
             android:id="@+id/playlistContainerProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:orientation="vertical" />
     </LinearLayout>
 </ScrollView>

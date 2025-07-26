@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.playmood.R;
 import com.example.playmood.model.FavoriteModel;
-import com.example.playmood.MusicPlayerActivity;
+import com.example.playmood.view.music.activity.MusicPlayerActivity;
 
 import java.util.List;
 

@@ -1,0 +1,45 @@
+package com.example.playmood.network.service;
+
+import com.google.gson.JsonObject;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
+
+public interface SupabaseFavoriteService {
+
+    @Headers({
+            "apikey: sb_secret_pPtrqnOgYBpKT-erW4dK0w_HgY1sLuD",
+            "Authorization: Bearer sb_secret_pPtrqnOgYBpKT-erW4dK0w_HgY1sLuD",
+            "Content-Type: application/json",
+            "Prefer: return=representation"
+    })
+    @POST("favorites")
+    Call<List<JsonObject>> addToFavorites(@Body JsonObject body);
+
+    @Headers({
+            "apikey: sb_secret_pPtrqnOgYBpKT-erW4dK0w_HgY1sLuD",
+            "Authorization: Bearer sb_secret_pPtrqnOgYBpKT-erW4dK0w_HgY1sLuD"
+    })
+    @GET("favorites")
+    Call<List<JsonObject>> getFavorites(
+            @Query("user_id") String userIdEq,
+            @Query("song_url") String songUrlEq
+    );
+
+    @Headers({
+            "apikey: sb_secret_pPtrqnOgYBpKT-erW4dK0w_HgY1sLuD",
+            "Authorization: Bearer sb_secret_pPtrqnOgYBpKT-erW4dK0w_HgY1sLuD"
+    })
+    @DELETE("favorites")
+    Call<Void> deleteFavorite(
+            @Query("user_id") String userIdEq,
+            @Query("song_url") String songUrlEq
+    );
+}

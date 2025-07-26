@@ -4,8 +4,8 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.example.playmood.network.RetrofitClient;
-import com.example.playmood.network.SupabaseFavoriteService;
-import com.example.playmood.view.MusicPlayerView;
+import com.example.playmood.network.service.SupabaseFavoriteService;
+import com.example.playmood.view.music.view.MusicPlayerView;
 import com.google.gson.JsonObject;
 
 import java.util.List;

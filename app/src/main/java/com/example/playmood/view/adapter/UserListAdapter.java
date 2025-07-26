@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.playmood.R;
 import com.example.playmood.model.UserModel;
-import com.example.playmood.view.OtherUserProfileFragment;
+import com.example.playmood.view.user.fragment.OtherUserProfileFragment;
 
 import java.util.List;
 
