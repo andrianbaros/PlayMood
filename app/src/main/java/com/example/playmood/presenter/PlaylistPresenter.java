@@ -64,20 +64,39 @@ public class PlaylistPresenter {
         String[] keywords;
         switch (mood.toLowerCase()) {
             case "happy":
-                keywords = happyKeywords; break;
+                keywords = happyKeywords;
+                break;
             case "sad":
-                keywords = sadKeywords; break;
+                keywords = sadKeywords;
+                break;
             case "neutral":
-                keywords = neutralKeywords; break;
+                keywords = neutralKeywords;
+                break;
             case "angry":
-                keywords = angryKeywords; break;
+                keywords = angryKeywords;
+                break;
             case "surprised":
-                keywords = surprisedKeywords; break;
+                keywords = surprisedKeywords;
+                break;
             default:
-                keywords = new String[]{"popular", "vibes", "chill"}; break;
+                keywords = new String[]{"popular", "vibes", "chill"};
+                break;
         }
 
-        String query = keywords[new Random().nextInt(keywords.length)];
+        // Gabungkan 3 kata acak dari keywords menjadi query
+        StringBuilder queryBuilder = new StringBuilder();
+        Random rand = new Random();
+        int count = 3; // jumlah kata untuk digabungkan
+
+        for (int i = 0; i < count; i++) {
+            String word = keywords[rand.nextInt(keywords.length)];
+            queryBuilder.append(word);
+            if (i < count - 1) {
+                queryBuilder.append(" ");
+            }
+        }
+
+        String query = queryBuilder.toString();
 
         Call<TrackResponse> call = trackService.searchTracks("Bearer " + token, query, "track", 15);
         call.enqueue(new Callback<TrackResponse>() {
@@ -86,7 +105,13 @@ public class PlaylistPresenter {
                 if (response.isSuccessful() && response.body() != null) {
                     List<TrackItem> tracks = response.body().tracks.items;
                     if (tracks != null && !tracks.isEmpty()) {
-                        view.onTracksReceived(tracks);
+                        // Filter hasil berdasarkan judul agar tidak ambigu
+                        List<TrackItem> filteredTracks = filterTracksByMood(tracks, mood);
+                        if (!filteredTracks.isEmpty()) {
+                            view.onTracksReceived(filteredTracks);
+                        } else {
+                            view.onError("Lagu tidak sesuai mood ditemukan: " + mood);
+                        }
                     } else {
                         view.onError("Tidak ada lagu ditemukan untuk mood: " + mood);
                     }
@@ -101,4 +126,35 @@ public class PlaylistPresenter {
             }
         });
     }
+
+    // Fungsi untuk filter hasil berdasarkan keyword dalam mood
+    private List<TrackItem> filterTracksByMood(List<TrackItem> tracks, String mood) {
+        String[] negativeWords = {"die", "death", "cry", "lonely", "sad", "pain", "broken", "melancholy"};
+        String[] positiveWords = {"smile", "joy", "happy", "cheer", "fun", "bright"};
+
+        return tracks.stream()
+                .filter(track -> {
+                    String title = track.name.toLowerCase();
+
+                    switch (mood.toLowerCase()) {
+                        case "happy":
+                            // Hindari lagu dengan kata negatif
+                            for (String neg : negativeWords) {
+                                if (title.contains(neg)) return false;
+                            }
+                            break;
+                        case "sad":
+                            // Hindari lagu dengan kata terlalu ceria
+                            for (String pos : positiveWords) {
+                                if (title.contains(pos)) return false;
+                            }
+                            break;
+                        // Kamu bisa tambahkan mood lain juga di sini
+                    }
+
+                    return true;
+                })
+                .toList();
+    }
+
 }
